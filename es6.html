@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 创建一百个为0的数组
+      Array.from({ 0: 0, length: 100 });
+      console.log(Array.from({ length: 100 }, () => 0));
+      [].fill(100);
+      console.log([1, 1, 1, 1].fill(0, 0, 100));
+      console.log(new Array(100).fill(0));
+      // 数组扁平
+      let ary = [1, [2, [3, [4, 5]]], 6];
+      let str = JSON.stringify(ary);
+      console.log(ary);
+      console.log(str);
+
+      // 1.直接的调用
+      arr_flat = ary.flat(Infinity);
+      console.log(arr_flat);
+      // 2.正则
+      ary = str.replace(/\[|]/g, "").split(",");
+      console.log(ary);
+      // 3 递归
+      let result = [];
+      let fn = function (ary) {
+        for (let i = 0; i < ary.length; i++) {
+          let item = ary[i];
+          if (Array.isArray(ary[i])) {
+            fn(item);
+          } else {
+            result.push(item);
+          }
+        }
+      };
+      fn(ary)
+      console.log(result);
+      //   4.用 reduce 实现数组的 flat 方法
+      function flatten(ary) {
+        return ary.reduce((pre, item) => {
+          return pre.concat(Array.isArray(item) ? flatten(item) : item);
+        },[]);
+      }
+      console.log(flatten(ary),'reduce');
+      //   5.扩展运算符
+      while (ary.some(Array.isArray)) {
+        ary = [].concat(...ary);
+      }
+      console.log(ary);
+    </script>
+  </body>
+</html>

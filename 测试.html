@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const expect = (ret) => {
+        return {
+          toBe(arg) {
+            if (ret !== arg) {
+              throw Error(`预期${arg}实际${ret}`);
+            } else {
+              console.log("通过");
+            }
+          },
+        };
+      };
+
+      const add1 = (a, b) => a + b; // 正确函数
+      expect(add1(1, 2)).toBe(3); // 通过测试
+
+      //   const add = (a, b) => a * b; // 错误函数
+      //   expect(add(1, 2)).toBe(3);
+      // 错误：预期3实际2
+      // let aset = new Set([NaN, NaN, 1, 2, +0, -0, undefined, undefined]);
+      // console.log(aset);
+
+      // let a = new Set([1, 2, 4, 8, 6]);
+      // let b = new Set([9, 7, 4, 5, 6]);
+      // let intere = new Set([...a].filter((x) => b.has(x)));
+      // console.log(intere);
+
+      // let form = new FormData();
+      // form.append("212", "2121");
+      // // form.forEach((key, val) => {
+      // //   console.log("key %s: value %s", key, val);
+      // // });
+      // console.log(form.getAll("212"));
+
+      //拓展运算符
+      let arr1 = [1, 2, 3, 4, 5];
+      let arr2 = [7, 8, 9, 4, 5];
+
+      arr1.push(...arr2);
+      console.log(arr1);
+    </script>
+  </body>
+</html>

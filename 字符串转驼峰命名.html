@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var foo = "get-element-by-id";
+      var arr = foo.split("-");
+      console.log(
+        arr[1].charAt(0).toUpperCase() + arr[1].substr(1, arr[1].length - 1)
+      );
+
+      // arr.join()
+      /* function fn() {
+        for (let i = 0; i < 5; i++) {
+          setTimeout(() => {
+            console.log(i);
+          });
+        }
+      }
+      fn(); */
+      /* for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+          console.log(i);
+        });
+      } */
+    </script>
+  </body>
+</html>

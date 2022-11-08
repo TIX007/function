@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function selectDictLabel(datas, value) {
+        if (value === undefined) {
+          return "";
+        }
+        var actions = [];
+        Object.keys(datas).some((key) => {
+          if (datas[key].value == "" + value) {
+            actions.push(datas[key].label);
+            return true;
+          }
+        });
+        if (actions.length === 0) {
+          actions.push(value);
+        }
+        return actions.join("");
+      }
+      let arry = [
+        { value: "1", label: "你好" },
+        { value: "2", label: "你好呀呀呀" },
+      ];
+      console.log(arry[1]);
+      console.log(selectDictLabel(arry, "2"));
+    </script>
+  </body>
+</html>

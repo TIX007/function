@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="one" type="button" value="">
+    <input type="search" name="" id="">
+    <input type="color" name="" id="">
+    <input type="image" src="https://ac-a.static.booking.cn/xdata/images/city/square250/683681.webp?k=f832825373d70572c6e9caf42ec58a9290ff0e6d17b2ab1bb4fa7f36c5d9b3a9&o=" alt="">
+    <input type="hidden" name="">
+    <input type="radio" name="" id="">
+    <input type="range" name="" id="">
+    <input type="reset" value="重置">
+    <input type="datetime" name="" id="">
+    <input type="datetime-local" name="" id="">
+    <input type="email" name="" id="">
+    <input type="file" name="" id="">
+    <input type="month" name="" id="">
+    <input type="number" name="" id="">
+    <input type="submit" value="12">
+    <input type="text" name="" id="">
+    <input type="time" name="" id="">
+    <input type="week" name="" id="">
+    
+    <script>
+        var a = [
+            {id:1},{id:2},{id:3},{id:4},
+        ]
+        var inp1 = document.getElementById('one')
+        console.log(inp1);
+        inp1.value = a
+        a.forEach(element => {
+            inp1.value = element.id
+        });
+    </script>
+</body>
+</html>

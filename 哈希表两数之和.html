@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Map.has()方法将要搜索的元素的键作为参数，并返回布尔值。如果该元素存在于Map中，则返回true；否则，如果该元素不存在，则返回false。
+      // new Map([iterable]) —— 创建 map，可选择带有 [key,value] 对的 iterable（例如数组）来进行初始化。
+      // map.set(key, value) —— 根据键存储值，返回 map 自身。
+      // map.get(key) —— 根据键来返回值，如果 map 中不存在对应的 key，则返回 undefined。
+      // map.has(key) —— 如果 key 存在则返回 true，否则返回 false。
+      // map.delete(key) —— 删除指定键对应的值，如果在调用时 key 存在，则返回 true，否则返回 false。
+      // map.clear() —— 清空 map 。
+      // map.size —— 返回当前元素个数。
+
+      var twoSum = function (nums, target) {
+        let map = new Map();
+        for (let i = 0, len = nums.length; i < len; i++) {
+          if (map.has(target - nums[i])) {
+            return [map.get(target - nums[i]), i];
+          } else {
+            map.set(nums[i], i);
+          }
+        }
+        return [];
+      };
+      
+      let map = new Map();
+      console.log(map.has);
+      console.log(map.set);
+      console.log(twoSum([2,3,7,3],6));
+    </script>
+  </body>
+</html>

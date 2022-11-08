@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/lottie.js" type="text/javascript"></script>
+  </head>
+
+  <body>
+    <div id="pong"></div>
+    <div style="width:100%;height:100%;background-color:#333;" id="bodymovin"></div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.1.2/svg.min.js"
+      integrity="sha512-I+rKw3hArzZIHzrkdELbKqrXfkSvw/h0lW/GgB8FThaBVz2e5ZUlSW8kY8v3q6wq37eybIwyufkEZxe4qSlGcg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+            // define document width and height
+      var width = 450, height = 300
+
+      // create SVG document and set its size
+      var draw = SVG('pong').size(width, height)
+      draw.viewbox(0,0,450,300)
+
+
+      // draw background
+      var background = draw.rect(width, height).fill('#dde3e1')
+
+      // draw line
+      var line = draw.line(width/2, 0, width/2, height)
+      line.stroke({ width: 5, color: '#fff', dasharray: '5,5' })
+    </script>
+    <script>
+
+    var animData = {
+        wrapper: document.getElementById('bodymovin'),
+        animType: 'html',
+        loop: true,
+        prerender: true,
+        autoplay: true,
+        path: 'data.json'
+
+    };
+    var anim = bodymovin.loadAnimation(animData);
+</script>
+  </body>
+</html>

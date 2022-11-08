@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <a href="mailto:1546214265@qq.com?subject=test&cc=sample@hotmail.com&subject=主题&body=内容">send mail</a>
+  <!-- <form
+      class="gform"
+      method="post"
+      data-email="example@email.net"
+      action="https://script.google.com/macros/s/AKfycbyMANJuNLqxAz0janyl4KM1C-6YQxQDYx1Ngh3hlzR4LYusgxAh_y7vRo8xXLORW3UR/exec"
+    ></form> -->
+
+  <form
+    action="https://script.google.com/macros/s/AKfycbzRhlYc_a0Vp730WcEf2J8XHBrr_56I5a5mhZ2pdE0VHnciBw0jBKQPpVkMFcSJz08/exec"
+    method="post" data-email="qazmlp2426@qq.com" role="form" class="php-email-form mt-4 gform">
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <input type="text" name="name" class="form-control" id="name" placeholder="你的名字" required />
+      </div>
+      <div class="col-md-6 form-group mt-3 mt-md-0">
+        <input type="email" class="form-control" name="email" id="email" placeholder="你的邮箱" required />
+      </div>
+    </div>
+    <div class="form-group mt-3">
+      <input type="text" class="form-control" name="subject" id="subject" placeholder="标题" required />
+    </div>
+    <div class="form-group mt-3">
+      <textarea class="form-control" name="message" rows="5" placeholder="正文" required></textarea>
+    </div>
+    <div class="my-3">
+      <div class="loading">加载中</div>
+      <div class="error-message"></div>
+      <div class="sent-message">你的信息已经发送出去了。 谢谢！</div>
+    </div>
+    <div class="text-center"><button type="submit">发送</button></div>
+  </form>
+  <script data-cfasync="false" type="text/javascript" src="./data.js"></script>
+
+  <!-- <script type="text/javascript">
+    loopy()
+    function loopy() {
+      var sWord = ""
+      while (sWord != "henenseo") {//设置密码 初始密码codeke
+        sWord = prompt("输入正确密码才能登陆!")
+      }
+      alert("欢迎访问")
+    }   
+  </script> -->
+  <!-- <script type="text/javascript">
+    function password() {
+      var testV = 1;
+      var pass1 = prompt('请输入密码', '');
+      while (testV < 3) {
+        if (!pass1)
+          history.go(-1);
+        if (pass1 == "henenseo") {//初始密码codeke
+          alert('密码正确');
+          break;
+        }
+        testV += 1;
+        var pass1 =
+          prompt('密码错误!请重新输入:');
+      }
+      if (pass1 != "password" & testV == 3)
+        history.go(-1);
+      return " ";
+    }
+    document.write(password());   
+  </script> -->
+  <script type="text/javascript">
+    function password() {
+      var testV = 1;
+      var pass1 = prompt('请输入密码:', '');
+      while (testV < 3) {
+        if (!pass1)
+          history.go(-1);
+        if (pass1 == "TIX007") {//设置密码 初始密码codeke
+          alert('口令正确，进行跳转');
+          window.location.href = "http://www.fengling.xyz/";//添加你要跳转的页面
+          break;
+        }
+        testV += 1;
+        var pass1 =
+          prompt('密码错误', '');
+      }
+      if (pass1 != "password" & testV == 3)
+        history.go(-1);
+      return " ";
+    }
+    document.write(password());   
+  </script>
+</body>
+
+</html>

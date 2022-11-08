@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="https://widget-page.qweather.net/h5/index.html?md=0123456&bg=1&lc=accu&key=cb0f36095728446880ca01fb5cd24179&v=_1660870919371">121</a>
+    <script>
+      class Car {
+        #color;
+        #colors;
+        hasColor() {
+          return #color in this;
+        }
+      }
+
+      const car = new Car();
+      const one = { add: 1, add2: 2 };
+      console.log(car.hasColor()); // true
+      console.log();
+      // -------------------------------------------------
+      const arr = ["a", "b", "c", "d"];
+      // 倒数第一个元素
+      console.log(arr.at(-1)); // d
+      // 第二个元素
+      console.log(arr.at(1)); // b
+      //   -------------------------------------------------
+      //   返回匹配到的子字符串的起始位置还返回其结束位置
+      const str = "sun and moon";
+      const regex = /and/d;
+      const matchObj = regex.exec(str);
+      /**
+        [
+        'and',
+        index: 4,
+        input: 'sun and moon',
+        groups: undefined,
+        indices: [ [ 4, 7 ], groups: undefined ]
+        ]
+        */
+      console.log(matchObj);
+      //   ---------------------------------------------------
+      //   检查某个对象自身是否拥有某个属性
+      class Carone {
+        color = "green";
+        age = 2;
+      }
+
+      const carone = new Carone();
+
+      console.log(carone.hasOwnProperty("age")); // true
+      console.log(carone.hasOwnProperty("name")); // false
+      //   改良
+      function objHasOwnProp(obj, propertyKey) {
+        return Object.prototype.hasOwnProperty.call(obj, propertyKey);
+      }
+
+      const obj = Object.create(null);
+      obj.color = "green";
+      obj.age = 2;
+      obj.hasOwnProperty = () => false;
+
+      console.log(objHasOwnProp(obj, "color")); // true
+      console.log(objHasOwnProp(obj, "name")); // false
+
+      //   ---------------------------------------------------
+    //   查找元素
+      const letters = [
+        { value: "v" },
+        { value: "w" },
+        { value: "x" },
+        { value: "y" },
+        { value: "z" },
+      ];
+
+      // 我们想要找的y元素比较靠后, 顺序查找性能不好
+      const found = letters.find((item) => item.value === "y");
+      const foundIndex = letters.findIndex((item) => item.value === "y");
+
+      console.log(found); // { value: 'y' }
+      console.log(foundIndex); // 3
+      //   后查
+      const aletters = [
+        { value: "v" },
+        { value: "w" },
+        { value: "x" },
+        { value: "y" },
+        { value: "z" },
+      ];
+
+      // 后序查找一下子快了，有木有
+      const afound = aletters.findLast((item) => item.value === "y");
+      const afoundIndex = aletters.findLastIndex((item) => item.value === "y");
+
+      console.log(afound); // { value: 'y' }
+      console.log(afoundIndex); // 3
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <script>
+        // 防抖
+        let inp = document.querySelector('input')
+        inp.oninput = debounce(function(){
+            console.log('hello',this.value);
+        },500)
+
+        function debounce(fn,delay) {
+            let t = null;
+            return function () {
+                if (t !== null) {
+                    clearTimeout(t);
+                }
+                t = setTimeout(() =>{
+                    fn.call(this)
+                },delay )
+            }
+        }
+        // 节流
+        window.onscroll = throttle(function(){
+            console.log('hello');
+        },500)
+        function throttle(fn,delay) {
+            let flag = true;
+            return function () {
+                if(flag){
+                    setTimeout(() =>{
+                        fn.call(this)
+                        flag = true;
+                    },delay)
+                }
+                flag = false;
+            }
+        }
+    </script>
+</body>
+</html>

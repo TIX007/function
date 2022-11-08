@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * [获取URL中的参数名及参数值的集合]
+       * 示例URL:http://htmlJsTest/getrequest.html?uid=admin&rid=1&fid=2&name=小明
+       * @param {[string]} urlStr [当该参数不为空的时候，则解析该url中的参数集合]
+       * @return {[string]}       [参数集合]
+       */
+      function GetRequest(urlStr) {
+        console.log(typeof urlStr);
+        if (typeof urlStr == "undefined") {
+          //判断URL数据类型是否为undefined
+          var url = decodeURI(location.search); //获取url中"?"符后的字符串
+          console.log(url);
+        } else {
+          var url = "?" + urlStr.split("?")[1];
+          console.log(url);
+        }
+        var theRequest = new Object();
+        console.log(url.indexOf("?"), "?");
+        if (url.indexOf("?") != -1) {
+          var str = url.substr(1);
+          console.log(str, "str");
+          strs = str.split("&");
+          console.log(strs, "strs");
+          console.log(theRequest);
+          console.log([strs[1].split("=")[0]]);
+          console.log(decodeURI(strs[1].split("=")[1]));
+          for (var i = 0; i < strs.length; i++) {
+            theRequest[strs[i].split("=")[0]] = decodeURI(
+              strs[i].split("=")[1]
+            );
+          }
+        }
+        return theRequest;
+      }
+
+      var parms_2 = GetRequest(
+        "http://htmlJsTest/getrequest.html?uid=admin&rid=1&fid=2&name=小明"
+      );
+      console.log(parms_2,'2'); // {"uid":"admin","rid":"1","fid":"2","name":"小明"}
+      // ---------------------------------------------------------------------------
+      function queryUrl(url) {
+        let obj = {};
+        if (url.indexOf("?") < 0) return obj;
+        let arr = url.split("?");
+        url = arr[1];
+        let array = url.split("&");
+        for (let i = 0; i < array.length; i++) {
+          let arr2 = array[i];
+          let arr3 = arr2.split("=");
+          obj[arr3[0]] = arr3[1];
+        }
+        return obj;
+      }
+      console.log(
+        queryUrl(
+          "http://htmlJsTest/getrequest.html?uid=admin&rid=1&fid=2&name=小明"
+        )
+      );
+    </script>
+  </body>
+</html>
