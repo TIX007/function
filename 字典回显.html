@@ -30,6 +30,26 @@
       ];
       console.log(arry[1]);
       console.log(selectDictLabel(arry, "2"));
+      // 字符串格式化(%s )
+      function sprintf(str) {
+        var args = arguments,
+          flag = true,
+          i = 1;
+        str = str.replace(/%s/g, function () {
+          var arg = args[i++];
+          if (typeof arg === "undefined") {
+            flag = false;
+            return "";
+          }
+          return arg;
+        });
+        return flag ? str : "";
+      }
+      var a = "nihaoa";
+      console.log(a);
+      console.log("%s", a);
+      console.log(sprintf(a));
+      console.log("%c测试内容", "color:red;font-size:18px;");
     </script>
   </body>
 </html>
