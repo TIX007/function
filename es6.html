@@ -38,20 +38,26 @@
           }
         }
       };
-      fn(ary)
+      fn(ary);
       console.log(result);
       //   4.用 reduce 实现数组的 flat 方法
       function flatten(ary) {
         return ary.reduce((pre, item) => {
           return pre.concat(Array.isArray(item) ? flatten(item) : item);
-        },[]);
+        }, []);
       }
-      console.log(flatten(ary),'reduce');
+      console.log(flatten(ary), "reduce");
       //   5.扩展运算符
       while (ary.some(Array.isArray)) {
         ary = [].concat(...ary);
       }
       console.log(ary);
+      // 6.
+      var a = 1;
+      var a2 = 2;
+      if ([1].includes(a)) {
+        console.log("dadasdasdsadasdsa");
+      }
     </script>
   </body>
 </html>

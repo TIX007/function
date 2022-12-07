@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .content {
+        /* width: 100px; */
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content"></div>
+    <script>
+      let columnContent = "dsa()1212dsadas你进帮会加班还不回家不会不会";
+      let flexWidth = 0;
+      for (const char of columnContent) {
+        if ((char >= "A" && char <= "Z") || (char >= "a" && char <= "z")) {
+          // 如果是英文字符，为字符分配8个单位宽度
+          flexWidth += 8;
+        } else if (char >= "\u4e00" && char <= "\u9fa5") {
+          // 如果是中文字符，为字符分配15个单位宽度
+          flexWidth += 17;
+        } else {
+          // 其他种类字符，为字符分配8个单位宽度
+          flexWidth += 15;
+        }
+      }
+      let con = document.querySelector(".content");
+      con.textContent = columnContent;
+      console.log(flexWidth, "flexWidth");
+    </script>
+  </body>
+</html>
