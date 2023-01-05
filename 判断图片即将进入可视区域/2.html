@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片加载优化</title>
+  </head>
+
+  <body>
+    <div style="background-color: green; width: 100vw; height: 8000px"></div>
+    <div
+      id="yellow"
+      style="background-color: yellow; width: 100vw; height: 800px"
+    ></div>
+
+    <script>
+      document.addEventListener("scroll", () => {
+        var bound = document.getElementById("yellow").getBoundingClientRect(); ////获取元素的大小及位置
+        var clientHeight = window.innerHeight;
+        console.log(bound, "bound");
+        if (bound.top <= clientHeight) {
+          console.log("进入可视区域啦");
+        }
+      });
+    </script>
+  </body>
+</html>
