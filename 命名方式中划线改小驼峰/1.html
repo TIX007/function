@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 一.
+      function transName(arr) {
+        let res = arr.map((e) => {
+          let items = e.split("-").map((item, index) => {
+            if (index) {
+              let first = item.substring(0, 1);
+              let rest = item.substring(1);
+              return first.toUpperCase() + rest;
+            } else {
+              return item.toLowerCase();
+            }
+          });
+          return items.join("");
+        });
+        return res;
+      }
+      console.log(transName(["A-b-cee", "ca-de-ea", "e-fe-eaa", "f-g", "mn"]));
+      //   二.
+      function turnName(str) {
+        return str.replace(/-[a-zA-Z]/g, (match) =>
+          match.replace("-", "").toUpperCase()
+        );
+      }
+      console.log(turnName("A-b-cee"));
+      //   命名方式小驼峰改中划线
+      let s1 = "aBBcdE";
+      let t = s1.replace(/[A-Z]/g, (match) => "-" + match.toLowerCase());
+      console.log(t);
+    </script>
+  </body>
+</html>
