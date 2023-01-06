@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <button id="xia">下载</button>
+    <button onclick="btn()">下载2</button>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      let x = document.getElementById("xia");
+      console.log(x);
+      // function downloadFile(filePath, name) {
+      //   const link = document.createElement("a");
+      //   link.style.display = "none";
+      //   link.href = filePath;
+      //   link.setAttribute("download", name);
+      //   document.body.appendChild(link);
+      //   link.click();
+      // }
+      // 文件下载并重命名
+      document.getElementById("xia").addEventListener("click", function () {
+        // downloadFile(
+        //   "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100",
+        //   "name"
+        // );
+        axios
+          .get(
+            "http://fengling.xyz:7001/public/upload/16594934170295e4502b9-439b-4402-a9ae-b93fdf860902.jpg",
+            {
+              responseType: "blob",
+            }
+          )
+          .then((res) => {
+            const myBlob = new Blob([res.data], { type: res.data.type });
+            console.log(res.data);
+            const download = (fileName, blob) => {
+              const link = document.createElement("a");
+              link.href = window.URL.createObjectURL(blob);
+              link.setAttribute("download", name);
+              link.download = fileName;
+              document.body.appendChild(link);
+              console.log(link.download, "link.download");
+              link.click();
+            };
+            download("你好.jpg", myBlob);
+          });
+      });
+      function btn() {
+        console.log("下载2");
+      }
+    </script>
+  </body>
+</html>
