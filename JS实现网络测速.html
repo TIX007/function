@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="img()">img加载测速</button>
+    <button onclick="ajax()">Ajax测速</button>
+    <button onclick="getSpeedWithDnlink()">downlink测速</button>
+    <button onclick="zong()">综合测速</button>
+    <script>
+      console.log(window.navigator.connection, "window.navigator.connection");
+      // img加载测速
+      function getSpeedWithImg(imgUrl, fileSize) {
+        return new Promise((resolve, reject) => {
+          let start = null;
+          let end = null;
+          let img = document.createElement("img");
+          start = new Date().getTime();
+          img.onload = function (e) {
+            end = new Date().getTime();
+            const speed = (fileSize * 1000) / (end - start);
+            resolve(speed);
+          };
+          img.src = imgUrl;
+        }).catch((err) => {
+          throw err;
+        });
+      }
+
+      //   Ajax测速
+      function getSpeedWithAjax(url) {
+        return new Promise((resolve, reject) => {
+          let start = null;
+          let end = null;
+          start = new Date().getTime();
+          const xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+              end = new Date().getTime();
+              const size = xhr.getResponseHeader("Content-Length") / 1024;
+              const speed = (size * 1000) / (end - start);
+              resolve(speed);
+            }
+          };
+          xhr.open("GET", url);
+          xhr.send();
+        }).catch((err) => {
+          throw err;
+        });
+      }
+
+      //   downlink测速
+      function getSpeedWithDnlink() {
+        // downlink测算网速
+        const connection = window.navigator.connection;
+        if (connection && connection.downlink) {
+          //   console.log((connection.downlink * 1024) / 8);
+          return (connection.downlink * 1024) / 8;
+        }
+      }
+
+      //   综合测速
+      function getNetSpeed(url, times) {
+        // downlink测算网速
+        const connection = window.navigator.connection;
+        if (connection && connection.downlink) {
+          return (connection.downlink * 1024) / 8;
+        }
+        // 多次测速求平均值
+        const arr = [];
+        for (let i = 0; i < times; i++) {
+          arr.push(getSpeedWithAjax(url));
+        }
+        return Promise.all(arr).then((speeds) => {
+          let sum = 0;
+          speeds.forEach((speed) => {
+            sum += speed;
+          });
+          return sum / times;
+        });
+      }
+
+      function img() {
+        getSpeedWithImg("https://s2.ax1x.com/2019/08/13/mPJ2iq.jpg", 8.97).then(
+          (speed) => {
+            console.log(speed);
+          }
+        );
+      }
+      function ajax() {
+        getSpeedWithAjax("./music/海市蜃楼 - 三叔说.mp3").then((speed) => {
+          console.log(speed);
+        });
+      }
+      function zong() {
+        console.log(
+          getNetSpeed("https://s2.ax1x.com/2019/08/13/mPJ2iq.jpg", 3)
+        );
+      }
+    </script>
+  </body>
+</html>
