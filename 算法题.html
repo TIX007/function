@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 删除排序数组中的重复项
+      var removeDuplicates = function (nums) {
+        let step = 0;
+        for (let i = 0; i < nums.length; i += step) {
+          //   s += 5;表示把s的值+5后复值给s
+          if (nums[i] === nums[i + 1]) {
+            //  arr.splice(i, j)  当 splice 方法有两个参数时，两个参数必须均为整数。表示从数组中索引为 i 开始删除，一共删除 j 个元素。
+            nums.splice(i + 1, 1);
+            step = 0;
+          } else {
+            step = 1;
+          }
+        }
+        console.log(nums);
+        return nums.length;
+      };
+      removeDuplicates([1, 1, 2, 2, 2, 3, 3]);
+      console.log(removeDuplicates([1, 1, 2, 2, 2, 3, 3]));
+    </script>
+  </body>
+</html>

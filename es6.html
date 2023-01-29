@@ -64,7 +64,14 @@
       un?.lo;
       un ?? console.log("空2");
       // 8
-
+      // 扁平化
+      function flatten(arr) {
+        return arr
+          .toString()
+          .split(",")
+          .map((item) => +item);
+      }
+      console.log(flatten([1, 2,[3, [4, 2]]]));
     </script>
   </body>
 </html>
