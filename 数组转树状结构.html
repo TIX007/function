@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 需转化数组示例
+      let data = [
+        { id: "01", lable: "项目经理", pid: "" },
+
+        { id: "02", lable: "交付经理", pid: "" },
+
+        { id: "02", lable: "产品leader", pid: "01" },
+
+        { id: "03", lable: "UIleader", pid: "01" },
+
+        { id: "04", lable: "技术leader", pid: "01" },
+
+        { id: "05", lable: "测试leader", pid: "01" },
+
+        { id: "06", lable: "运维leader", pid: "01" },
+
+        { id: "07", lable: "产品经理", pid: "02" },
+
+        { id: "08", lable: "产品经理", pid: "02" },
+
+        { id: "09", lable: "UI设计师", pid: "03" },
+
+        { id: "10", lable: "前端工程师", pid: "04" },
+
+        { id: "11", lable: "后端工程师", pid: "04" },
+
+        { id: "12", lable: "后端工程师", pid: "04" },
+
+        { id: "13", lable: "测试工程师", pid: "05" },
+
+        { id: "14", lable: "测试工程师", pid: "05" },
+
+        { id: "15", lable: "运维工程师", pid: "06" },
+      ];
+
+      function toTree(data) {
+        // 1.定义最外层的数组
+        const tree = [];
+        // 2.定义一个空对象
+        const otherObj = {};
+        // 3.遍历数组内所有对象
+        data.forEach((item) => {
+          // 3.1.给每个当前对象添加一个 children 属性, 以便存放子级对象
+          item.children = [];
+          // 3.2 将当前对象的 id 作为键, 与当前对象自身形成键值对
+          otherObj[item.id] = item;
+        });
+
+        // 4.再次遍历数组内所有对象
+        data.forEach((item) => {
+          // 4.1.判断每个当前对象的 pid, 如当前对象 pid 不为空, 则说明不是最上级的根对象
+          if (item.pid) {
+            // 4.3.利用当前对象的 otherObj[pid] 找到 otherObj[id] 中对应当前对象的父级对象, 将当前对象添加到其对应的父级对象的 children 属性中
+            otherObj[item.pid].children.push(item);
+          } else {
+            // 4.3.当前对象 pid 如果为空, 则为树状结构的根对象
+            tree.push(item);
+          }
+        });
+        // 5.返回树状结构
+        return tree;
+      }
+
+      toTree(data);
+      console.log(toTree(data));
+    </script>
+  </body>
+</html>
