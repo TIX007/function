@@ -11,9 +11,12 @@
       var twoSum = function (nums, target) {
         let map = new Map();
         for (let i = 0; i < nums.length; i++) {
+          // has() 返回一个bool值，用来表明map 中是否存在指定元素
           if (map.has(target - nums[i])) {
+            // get() 方法用来获取一个 Map 对象中指定的元素。
             return [map.get(target - nums[i]), i];
           } else {
+            // set() 方法为Map对象添加一个指定键（key）和值（value）的新元素。
             map.set(nums[i], i);
           }
         }
