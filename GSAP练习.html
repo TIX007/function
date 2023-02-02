@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+
+      .box1 {
+        width: 100px;
+        height: 100px;
+        background-color: orange;
+      }
+
+      .box2 {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+      }
+
+      .box3 {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="box"></div>
+
+    <p>
+      <button id="pause-btn">Pause 暂停</button>
+      <button id="play-btn">Play 开始</button>
+      <button id="restart-btn">Restart 重新开始</button>
+      <button id="switch-btn">Switch 开关</button>
+    </p>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script>
+      let myTween = gsap.to(".box", {
+        x: 500,
+        delay: 2,
+        duration: 5,
+      });
+
+      let oPause = document.querySelector("#pause-btn");
+      oPause.onclick = function () {
+        myTween.pause();
+      };
+
+      let oPlay = document.querySelector("#play-btn");
+      oPlay.onclick = function () {
+        myTween.play();
+      };
+
+      let oRestart = document.querySelector("#restart-btn");
+      oRestart.onclick = function () {
+        myTween.restart();
+        myTween1.restart();
+      };
+
+      let oSwitch = document.querySelector("#switch-btn");
+      oSwitch.onclick = function () {
+        myTween.paused(!myTween.paused());
+      };
+      //   ------------------------------------
+      //   上述示例中，为了实现各个执行动画，必须计算每个动画的延迟时间，GSAP 为了提高程序的可维护性，可以通过 gsap 调用 timeline 方法获得 Timeline 实例，此实例可以统一管理某些动画的执行
+      let tl = gsap.timeline();
+      tl.to(".box1", {
+        x: 500,
+        duration: 3,
+      });
+      tl.to(".box1", {
+        y: 300,
+        duration: 2,
+      });
+      tl.to(".box1", {
+        x: 800,
+        duration: 5,
+      });
+      //   上述示例中，通过 Timeline 实例的 to 方法为元素添加动画后，即使不指定延迟时间，所有动画将自动依次执行，此外，Timeline 存在实例方法 add，此方法可以以数组的形式添加 Tween 实例，示例如下：
+      let myTween1 = tl.add([
+        gsap.to(".box2", {
+          x: 500,
+          duration: 3,
+        }),
+        gsap.to(".box2", {
+          y: 300,
+          duration: 2,
+        }),
+        gsap.to(".box2", {
+          x: 800,
+          duration: 5,
+        }),
+      ]);
+      //   上述示例中，元素的运动轨迹有所改变，原因在于，如果通过 add 实例方法添加若干动画，那么它们是同时执行的，所以通常使用 add 实例方法添加同时执行的一组动画，使用 to 实例方法添加一个动画，此外，实例方法 add 和 to 可以无限次的调用，所有动画都默认将以添加的序列依次执行，示例如下：
+      tl.add([
+        gsap.to(".box3", {
+          x: 500,
+          duration: 3,
+        }),
+        gsap.to(".box3", {
+          y: 300,
+          duration: 2,
+        }),
+        gsap.to(".box3", {
+          x: 800,
+          duration: 5,
+        }),
+      ]);
+
+      tl.to(".box3", {
+        y: 400,
+        duration: 5,
+      });
+    </script>
+  </body>
+</html>
