@@ -8,7 +8,7 @@
   </head>
   <body>
     <pre id="display"></pre>
-    <script src="diff.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jsdiff/5.1.0/diff.js"></script>
     <script>
       const one = "beep boop",
         other = "beep boob blah",
@@ -16,7 +16,8 @@
 
       let span = null;
 
-      const diff = Diff.diffChars(one, other),
+      //  diffWords 单词差异 diffLines 行差异 diffChars 字符差异
+      const diff = Diff.diffLines(one, other),
         display = document.getElementById("display"),
         fragment = document.createDocumentFragment();
 
