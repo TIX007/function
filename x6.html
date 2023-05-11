@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src="https://unpkg.com/@antv/x6/dist/x6.js"></script>
+    <script>
+      // import { Graph } from '@antv/x6'
+
+      const data = {
+        nodes: [
+          {
+            id: "node1",
+            shape: "custom-node",
+            x: 40,
+            y: 40,
+            width: 100,
+            height: 40,
+            attrs: {
+              body: {
+                fill: "#2ECC71",
+                stroke: "#000",
+                strokeDasharray: "10,2",
+              },
+              label: {
+                text: "Hello",
+                fill: "#333",
+                fontSize: 13,
+              },
+            },
+          },
+          {
+            id: "node2",
+            x: 180,
+            y: 240,
+            width: 100,
+            height: 40,
+            attrs: {
+              body: {
+                fill: "#F39C12",
+                stroke: "#000",
+                rx: 16,
+                ry: 16,
+              },
+              label: {
+                text: "World",
+                fill: "#333",
+                fontSize: 18,
+                fontWeight: "bold",
+                fontVariant: "small-caps",
+              },
+            },
+          },
+        ],
+        edges: [
+          {
+            source: "node1",
+            target: "node2",
+            shape: "double-edge",
+          },
+        ],
+      };
+
+      // X6.Graph = Graph
+      X6.Graph.registerNode(
+        "custom-node",
+        {
+          markup: [
+            {
+              tagName: "rect",
+              selector: "body",
+            },
+            {
+              tagName: "text",
+              selector: "label",
+            },
+            {
+              tagName: "g",
+              children: [
+                {
+                  tagName: "text",
+                  selector: "btnText",
+                },
+                {
+                  tagName: "rect",
+                  selector: "btn",
+                },
+              ],
+            },
+          ],
+          attrs: {
+            btn: {
+              refX: "100%",
+              refX2: -28,
+              y: 4,
+              width: 24,
+              height: 18,
+              rx: 10,
+              ry: 10,
+              fill: "rgba(255,255,0,0.01)",
+              stroke: "red",
+              cursor: "pointer",
+              event: "node:delete",
+            },
+            btnText: {
+              fontSize: 14,
+              fill: "red",
+              text: "x",
+              refX: "100%",
+              refX2: -19,
+              y: 17,
+              cursor: "pointer",
+              pointerEvent: "none",
+            },
+            body: {
+              fill: "#ffffff",
+              stroke: "#333333",
+              strokeWidth: 2,
+              refWidth: "100%",
+              refHeight: "100%",
+            },
+            label: {
+              fontSize: 14,
+              fill: "#333333",
+              refX: "50%",
+              refY: "50%",
+              textAnchor: "middle",
+              textVerticalAnchor: "middle",
+            },
+          },
+        },
+        true
+      );
+
+      const graph = new X6.Graph({
+        container: document.getElementById("container"),
+        width: 800,
+        height: 600,
+        background: {
+          color: "#fffbe6", // 设置画布背景颜色
+        },
+        grid: {
+          size: 10, // 网格大小 10px
+          visible: true, // 渲染网格背景
+        },
+      });
+
+      function reset() {
+        graph.drawBackground({ color: "#fff" });
+        const nodes = graph.getNodes();
+        const edges = graph.getEdges();
+
+        nodes.forEach((node) => {
+          node.attr("body/stroke", "#000");
+        });
+
+        edges.forEach((edge) => {
+          edge.attr("line/stroke", "black");
+          edge.prop("labels/0", {
+            attrs: {
+              body: {
+                stroke: "black",
+              },
+            },
+          });
+        });
+      }
+
+      //   点击高亮
+      graph.on("node:click", ({ node }) => {
+        reset();
+        node.attr("body/stroke", "orange");
+      });
+
+      graph.on("edge:click", ({ edge }) => {
+        reset();
+        edge.attr("line/stroke", "orange");
+        edge.prop("labels/0", {
+          attrs: {
+            body: {
+              stroke: "orange",
+            },
+          },
+        });
+      });
+
+      //   删除
+      graph.on("node:delete", ({ view, e }) => {
+        e.stopPropagation();
+        view.cell.remove();
+      });
+
+      graph.on("node:customevent", ({ name, view, e }) => {
+        if (name === "node:delete") {
+          e.stopPropagation();
+          view.cell.remove();
+        }
+      });
+
+      graph.fromJSON(data);
+      graph.zoom(-0.5);
+      graph.translate(80, 40);
+    </script>
+  </body>
+</html>

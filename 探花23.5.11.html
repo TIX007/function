@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        height: 100px;
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+        display: flex;
+        align-items: center;
+      }
+      .icon {
+        height: 100px;
+        border-left: 1px dashed;
+        display: flex;
+        align-items: center;
+      }
+      .icon-text {
+        width: 50px;
+        height: 50px;
+        margin: 0 12px;
+      }
+      .text {
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        border-left: 1px dashed;
+      }
+      .greater {
+        height: 100px;
+        border-left: 1px dashed;
+        border-right: 1px dashed;
+        display: flex;
+        align-items: center;
+      }
+      .greaterThan {
+        height: 13px;
+        width: 20px;
+        margin: 0 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="icon">
+        <div class="icon-text">[icon]</div>
+      </div>
+      <div class="text">
+        <span class="title">title</span><span class="content">content</span>
+      </div>
+      <div class="greater"><div class="greaterThan">></div></div>
+    </div>
+    <script>
+      //     字符串隐藏部分内容
+      // 说明：实现一个方法，接收一个字符串和一个符号，将字符串中间四位按指定符号隐藏
+      // 符号无指定时使用星号（*）
+      // 接收的字符串小于或等于四位时，返回同样长度的符号串，等同于全隐藏，如 123，隐藏后是 ***
+      // 字符串长度是大于四位的奇数时，如 123456789，隐藏后是 12****789，奇数多出来的一位在末尾
+      function mask(str, rep = "*") {
+        let strArr = str.split("");
+        let leg = strArr.length;
+        let result = [];
+        let num = Math.ceil((leg - 4) / 2);
+        for (let i = 0; i < leg; i++) {
+          if (leg - num - 4 - 1 >= i || i >= leg - num) {
+            result.push(strArr[i]);
+          } else {
+            result.push(rep);
+          }
+        }
+        return result.join("");
+      }
+      mask("123");
+      console.log(mask("123"));
+      //   *******************************************
+      const object = {
+        a: {
+          b: {
+            c: "c5",
+            d: 2,
+          },
+        },
+      };
+      const deepPick = (key, obj) => {
+        const [first, ...props] = key.split(".");
+        return props.length
+          ? deepPick(props.join("."), obj[first])
+          : obj[first];
+      };
+
+      //   deepPick("a.b.c", object); // zdde
+      console.log(deepPick("a.b.c", object));
+      //   **************************************************
+      //       实现一个方法，用以比较两个版本号（version1, version2）大小。如果version1 > version2，返回 1；如果version1 < version2，返回 -1；其他情况返回0。版本号规则x.y.z，xyz 均为大于等于 0 的整数，且至少有 2 位。
+      // 示例：
+      // compareVersion(‘0.1’, ‘1.1.1’); // 返回-1
+      // compareVersion(‘13.37’, '1.2 '); // 返回1
+      // compareVersion(‘1.1’, ‘1.1.0’); // 返回0
+      function compareVersion(version1, version2) {}
+      const versionReg = function (version) {
+        const reg = new RegExp(/^[0-9](\d+)?(.\d+){1,2}$/);
+        if (!reg.test(version)) {
+          const error = new Error(
+            "版本号规则`x.y.z`，xyz 均为大于等于 0 的整数，且至少有 2 位"
+          );
+          throw error.message;
+        }
+      };
+      var compareVersion = function (version1, version2) {
+        versionReg(version1);
+        versionReg(version2);
+
+        const v1 = version1.split(".").map((item) => Number(item));
+        const v2 = version2.split(".").map((item) => Number(item));
+
+        const is = v1.length - v2.length;
+
+        if (is <= 0) {
+          for (let i = 0; i < -is; i++) {
+            v1.push(0);
+          }
+        } else {
+          for (let i = 0; i < is; i++) {
+            v2.push(0);
+          }
+        }
+
+        for (let i = 0; i < v1.length; i++) {
+          for (let k = 0; k < v2.length; k++) {
+            if (i == k) {
+              if (v1[i] == v2[k]) break;
+              if (v1[i] > v2[k]) return 1;
+              if (v1[i] < v2[k]) return -1;
+            }
+          }
+        }
+        return 0;
+      };
+
+      // compareVersion('0.1', '1.1.1'); // 返回-1
+      // compareVersion('13.37', '1.2 '); // 返回1
+      compareVersion("1.1", "1.1.0"); // 返回0
+      // ******************************************************
+      const arys = [{ a: 6 }, { a: 1 }, { a: 5 }, { a: 2 }];
+      let result = arys
+        .filter((ary) => ary.a !== 1)
+        .map((element) => element.a);
+      console.log(result.sort().join(""));
+      //   ********************************************************
+    </script>
+  </body>
+</html>
