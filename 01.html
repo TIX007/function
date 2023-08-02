@@ -1,22 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+    <style>
+      .div0 {
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        background-color: blue;
+      }
+      .div1,
+      .div3 {
+        width: 100%;
+        height: 100px;
+      }
+      .div2 {
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="one">111</button>
+    <div class="div0">
+      <div class="div1"></div>
+      <div class="div2"></div>
+      <div class="div3"></div>
+    </div>
     <script>
-        function d(item) {
-            let time= null;
-            time = setTimeout(() => {
-                
-            }, 500);
-            if (time != null) {
-                clearInterval(time);
-            }
-        }
+      let one = document.querySelector(".one");
+      one.onclick = throttle(function () {
+        console.log("hello", this.value);
+      }, 500);
+      function debounce(fn, delay) {
+        let t = null;
+        return function () {
+          if (t !== null) {
+            clearTimeout(t);
+          }
+          t = setTimeout(() => {
+            fn.call(this);
+          }, delay);
+        };
+      }
+
+      function throttle(fn, delay) {
+        let flag = true;
+        return function () {
+          if (flag) {
+            setTimeout(() => {
+              console.log(this);
+              fn.call(this);
+              flag = true;
+            }, delay);
+          }
+          flag = false;
+        };
+      }
     </script>
-</body>
+  </body>
 </html>
